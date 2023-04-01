@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/list_fragment"
+        android:icon="@drawable/ic_nav"
+        android:title="@string/title_list" />
+
+    <item
+        android:id="@+id/compatibility_fragment"
+        android:icon="@drawable/ic_compability"
+        android:title="@string/title_compatibility" />
+
+    <item
+        android:id="@+id/information_fragment"
+        android:icon="@drawable/ic_information"
+        android:title="@string/title_information" />
+
+
+</menu>
