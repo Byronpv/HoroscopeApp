@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/list_fragment"
-        android:name="com.example.horoscopeapp.presentation.list.ListFragment"
+        android:name="com.example.horoscopeapp.presentation.listHoroscope.ListHoroscopeFragment"
         android:label="fragment_information"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list_horoscope" />
 
     <fragment
         android:id="@+id/information_fragment"
