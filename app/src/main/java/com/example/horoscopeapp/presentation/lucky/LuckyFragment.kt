@@ -33,11 +33,7 @@ class LuckyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //    binding.textViewCard.animate().alpha(1f).duration = 1000
-
-/*        val rotation = AnimationUtils.loadAnimation(requireContext(),R.anim.rotation)
-        binding.textViewCard.startAnimation(rotation)*/
-
+        //binding.textViewCard.animate().alpha(1f).duration = 1000
         binding.viewFrontContainer.viewCardFront
         binding.viewBackContainer.viewBack.setOnClickListener {
             preparedCard()
@@ -50,9 +46,9 @@ class LuckyFragment : Fragment() {
             with(binding) {
                 viewFrontContainer.viewFront.isVisible = true
                 val scale = requireContext().resources.displayMetrics.density
-                val cameraDist = 8000 * scale
-                viewFrontContainer.viewCardFront.cameraDistance = cameraDist
-                viewBackContainer.viewCardBack.cameraDistance = cameraDist
+                val cameraDist = NUMBER_DENSITY * scale
+                viewFrontContainer.viewFront.cameraDistance = cameraDist
+                viewBackContainer.viewBack.cameraDistance = cameraDist
 
                 val flipOutAnimatorSet = AnimatorInflater.loadAnimator(
                     requireContext(),
@@ -95,5 +91,9 @@ class LuckyFragment : Fragment() {
                 image
             )
         )
+    }
+
+    companion object {
+        const val NUMBER_DENSITY = 8000
     }
 }
