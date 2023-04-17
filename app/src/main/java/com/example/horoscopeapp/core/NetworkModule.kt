@@ -26,5 +26,4 @@ object NetworkModule {
     fun provideHoroscopeApi(retrofit: Retrofit):HoroscopeApi{
         return retrofit.create(HoroscopeApi::class.java)
     }
-
 }

@@ -5,6 +5,8 @@ plugins {
     id("com.google.dagger.hilt.android")
 }
 
+apply from: "../app/config/detekt/detekt.gradle"
+
 android {
     namespace 'com.example.horoscopeapp'
     compileSdk 33
@@ -31,6 +33,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    viewBinding {
+        enable = true
     }
 }
 
