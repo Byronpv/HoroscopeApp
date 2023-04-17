@@ -9,12 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.animation.doOnEnd
+import androidx.core.animation.doOnStart
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.alpha
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.example.horoscopeapp.R
 import com.example.horoscopeapp.databinding.FragmentLuckyBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlin.random.Random
 
 @AndroidEntryPoint
@@ -23,6 +26,10 @@ class LuckyFragment : Fragment() {
     private val viewModel by viewModels<LuckyViewModel>()
     private var _binding: FragmentLuckyBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var randomCardsProvider: RandomCardsProvider
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -67,7 +74,10 @@ class LuckyFragment : Fragment() {
                 flipOutAnimatorSet.start()
                 flipInAnimatorSet.start()
 
-                flipOutAnimatorSet.doOnEnd { viewBackContainer.viewBack.isVisible = false }
+                flipOutAnimatorSet.doOnEnd {
+                    textViewCard.animate().alpha(1f).duration = 1000
+                    viewBackContainer.viewBack.isVisible = false
+                }
             }
         } catch (e: Exception) {
             Log.e("LuckyFragment", e.toString())
@@ -75,22 +85,14 @@ class LuckyFragment : Fragment() {
     }
 
     private fun preparedCard() {
-        val image = when (Random.nextInt(0, 5)) {
-            0 -> R.drawable.card_fool
-            1 -> R.drawable.card_moon
-            2 -> R.drawable.card_hermit
-            3 -> R.drawable.card_star
-            4 -> R.drawable.card_sun
-            5 -> R.drawable.card_sword
-            else -> R.drawable.card_reverse
-        }
-
+        val luckyCard = randomCardsProvider.getLucky()
         binding.viewFrontContainer.viewCardFront.setImageDrawable(
             ContextCompat.getDrawable(
                 requireContext(),
-                image
+                luckyCard.image
             )
         )
+        binding.textViewCard.text = getString(luckyCard.textCard)
     }
 
     companion object {
